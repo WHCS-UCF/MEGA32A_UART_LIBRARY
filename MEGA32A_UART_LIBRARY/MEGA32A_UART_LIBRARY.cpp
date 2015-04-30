@@ -5,8 +5,6 @@
  *  Author: Jimmy
  */ 
 
-#define F_CPU 1000000UL
-#define USART_BAUDRATE 9600
 #define BAUD_PRESCALE (((F_CPU / (USART_BAUDRATE * 8UL))) - 1)
 
 
