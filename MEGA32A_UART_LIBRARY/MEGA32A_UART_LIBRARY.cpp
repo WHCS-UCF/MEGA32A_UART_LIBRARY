@@ -85,7 +85,7 @@ uint8_t USART_ReceiveHexi() {
 	return upper | lower;
 }
 
-void SendHexiByte(uint8_t byte) {
+void USART_SendHexByte(uint8_t byte) {
 	char upper = (byte & 0b11110000 );
 	char lower = (byte & 0b00001111 );
 	
@@ -105,14 +105,14 @@ void SendHexiByte(uint8_t byte) {
 	}
 }
 
-void SendHexiArary(uint8_t *bytes, int length) {
+void USART_sendHexArray(uint8_t *bytes, int length) {
 	int i = 0;
 	for(i=0;i<length;i++) {
-		SendHexiByte(bytes[i]);
+		USART_SendHexByte(bytes[i]);
 	}
 }
 
-void serialSendString(const char *str) {
+void USART_sendString(const char *str) {
 	int i=0;
 	while(str[i] != 0x00) {
 		USART_SendByte(str[i]);

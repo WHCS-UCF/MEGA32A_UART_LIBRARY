@@ -34,10 +34,10 @@ uint8_t hexLetterToNumber(uint8_t c);
 //The function returns 0x11101010
 uint8_t USART_ReceiveHexi();
 
-void SendHexiByte(uint8_t byte);
+void USART_SendHexByte(uint8_t byte);
 
-void SendHexiArary(uint8_t *bytes, int length);
+void USART_sendHexArray(uint8_t *bytes, int length);
 
-void serialSendString(const char *str);
+void USART_sendString(const char *str);
 
 #endif /* MEGA32A_UART_LIBRARY_H_ */
