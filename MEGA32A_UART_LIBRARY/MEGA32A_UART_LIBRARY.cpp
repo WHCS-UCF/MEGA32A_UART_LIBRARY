@@ -5,18 +5,30 @@
  *  Author: Jimmy
  */ 
 
-#define BAUD_PRESCALE (((F_CPU / (USART_BAUDRATE * 8UL))) - 1)
-
+#if F_CPU == 1000000
+ #define BAUD 9600
+#elif F_CPU == 16000000
+ #define BAUD 115200
+#else
+ #error "Unsupported CPU speed"
+#endif
 
 #include <avr/io.h>
 
+// Baudrate tolerance setting
+// not sure if this will break things in the future
+#define BAUD_TOL 9
+#include <util/setbaud.h>
+
 void initUart(){
 	
-	//Asynchronous Double Speed Mode
-	/*
-	BAUD = (fosc/(8(UBRR+1)))
-	*/
+	/* Asynchronous Double Speed Mode
+	    BAUD = (fosc/(8(UBRR+1))) */
+#if USE_2X == 1
 	UCSRA |= (1 << U2X);
+#else
+	UCSRA &= ~(1 << U2X);
+#endif
 
 	/* Turn on the transmission and reception circuitry. */
 	/*
@@ -31,9 +43,11 @@ void initUart(){
 	*/
 	UCSRB |= (1 << RXEN) | (1 << TXEN);
 
-	/* BAUD prescale */
-	//For use in calculating the baud rate, this is not the actual BAUD rate.
-	UBRRL = 12;	
+	/* BAUD prescale 
+	 * set by <util/setbaud.h> */
+
+	UBRRL = UBRRL_VALUE;
+	UBRRH = UBRRH_VALUE;
 }
 
 void enableRXInterrupts(){
