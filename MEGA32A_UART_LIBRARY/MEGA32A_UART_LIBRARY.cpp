@@ -13,6 +13,33 @@
 
 #include <avr/io.h>
 
+#if defined(__AVR_ATmega328P__)
+  #define UCSRA UCSR0A
+  #define MPCM MPCM0
+  #define U2X U2X0
+  #define UPE UPE0
+  #define DOR DOR0
+  #define FE FE0
+  #define UDRE UDRE0
+  #define TXC TXC0
+  #define RXC RXC0
+
+  #define UCSRB UCSR0B
+  #define TXB8 TXB80
+  #define RXB8 RXB80
+  #define UCSZ2 UCSZ02
+  #define TXEN TXEN0
+  #define RXEN RXEN0
+  #define UDRIE UDRIE0
+  #define TXCIE TXCIE0
+  #define RXCIE RXCIE0
+
+  #define UDR UDR0
+
+  #define UBRRL UBRR0L
+  #define UBRRH UBRR0H
+#endif
+
 // Baudrate tolerance setting
 // not sure if this will break things in the future
 #define BAUD_TOL 9
