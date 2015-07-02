@@ -5,13 +5,11 @@
  *  Author: Jimmy
  */ 
 
-#if F_CPU == 1000000
- #define BAUD 9600
-#elif F_CPU == 16000000
- #define BAUD 115200
-#else
- #error "Unsupported CPU speed"
+#ifndef USART_BAUD
+ #error "USART Baud rate must be defined"
 #endif
+
+#define BAUD USART_BAUD
 
 #include <avr/io.h>
 
