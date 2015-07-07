@@ -14,6 +14,8 @@
 void initUart();
 
 void enableRXInterrupts();
+void enableTXInterrupts();
+void disableTXInterrupts();
 
 void setBaudPrescaler(int prescaler);
 

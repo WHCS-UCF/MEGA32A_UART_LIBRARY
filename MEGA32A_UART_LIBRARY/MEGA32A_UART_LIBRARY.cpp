@@ -76,7 +76,15 @@ void initUart(){
 }
 
 void enableRXInterrupts(){
-	UCSRB |= (1 << RXCIE);	
+	UCSRB |= (1 << RXCIE);
+}
+
+void enableTXInterrupts(){
+	UCSRB |= _BV(UDRIE);
+}
+
+void disableTXInterrupts(){
+	UCSRB &= ~_BV(UDRIE);
 }
 
 void setBaudPrescaler(int prescaler){
